@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 <meta name="theme-color" content="#0a0a0f">
-<title>Sign to Voice | Setup</title>
+<title>Sign to Voice  -  Setup</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -134,7 +134,7 @@ html,body{
   <div class="brand">Gesture Squad</div>
   <div class="title">Sign to Voice</div>
   <div class="tagline">
-    Inclusive Innovation —<br>
+    Inclusive Innovation  - <br>
     <em>a world where everyone can be heard</em>
   </div>
 
@@ -144,7 +144,7 @@ html,body{
     <div class="status-title" id="stitle">Preparing your device</div>
     <div class="status-sub" id="ssub">
       Downloading hand detection model.<br>
-      This happens once — stay on this page.
+      This happens once  -  stay on this page.
     </div>
 
     <!-- Progress bar -->
@@ -177,15 +177,17 @@ html,body{
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-text">
-        Your phone will show a <strong>"Sign in to network"</strong> notification.
-        Tap it — or open your browser and go to <strong>http://sign.voice</strong>
+        Your phone will show a <strong>"Sign in to network"</strong> notification  - 
+        tap it. Or open your browser and go to
+        <strong>http://192.168.4.1</strong>
+        <span style="color:var(--mut)"> (or http://sign.voice on Android)</span>
       </div>
     </div>
     <div class="step">
       <div class="step-num">4</div>
       <div class="step-text">
         Tap <strong>Connect</strong> on the app screen.
-        Hold your hand in front of the camera — gesture translation starts immediately.
+        Hold your hand in front of the camera  -  gesture translation starts immediately.
       </div>
     </div>
   </div>
@@ -258,7 +260,7 @@ function loadScript(url, onDone, onErr){
 function startInit(){
   document.getElementById('retryBtn').style.display = 'none';
   setStatus('⏳', 'Preparing your device',
-    'Downloading hand detection model.\nThis happens once — stay on this page.');
+    'Downloading hand detection model.\nThis happens once  -  stay on this page.');
   setProgress(0);
 
   // Step 1: load hands.js (triggers internal asset loading)
@@ -266,7 +268,7 @@ function startInit(){
   loadScript(MP_CDN + 'hands.js',
     function(){
       setProgress(65);
-      // Step 2: initialise MediaPipe — this downloads WASM + model files
+      // Step 2: initialise MediaPipe  -  this downloads WASM + model files
       setStatus('⏳', 'Loading model files', 'Downloading WASM and hand detection model...');
       try{
         var h = new Hands({locateFile:function(f){ return MP_CDN+f; }});
