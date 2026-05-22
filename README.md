@@ -1,4 +1,4 @@
-# Sign to Voice — S2V1
+# Sign to Voice  S2V1
 
 > *Inclusive Innovation — a world where everyone can be heard*
 
