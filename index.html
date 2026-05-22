@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+<meta name="theme-color" content="#0a0a0f">
+<title>Sign to Voice — Setup</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0f;--sur:#12121a;--bor:#1e1e2e;
+  --acc:#00e5a0;--txt:#e8e8f0;--mut:#4a4a6a;--warn:#ff6b35
+}
+html,body{
+  width:100%;min-height:100%;
+  background:var(--bg);color:var(--txt);
+  font-family:system-ui,sans-serif;
+  display:flex;align-items:center;justify-content:center;
+  padding:32px 24px;
+}
+.card{
+  width:100%;max-width:360px;
+  display:flex;flex-direction:column;
+  align-items:center;gap:0;
+}
+.brand{
+  font-size:11px;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--mut);margin-bottom:20px;
+}
+.title{
+  font-size:32px;font-weight:800;
+  color:var(--acc);letter-spacing:-.02em;
+  text-align:center;margin-bottom:6px;
+}
+.tagline{
+  font-size:13px;color:var(--mut);
+  text-align:center;font-style:italic;
+  line-height:1.6;margin-bottom:40px;
+}
+.tagline em{color:var(--txt);font-style:normal}
+
+/* status box */
+.status-box{
+  width:100%;
+  background:var(--sur);
+  border:1px solid var(--bor);
+  border-radius:16px;
+  padding:28px 24px;
+  text-align:center;
+  margin-bottom:24px;
+}
+.status-icon{
+  font-size:40px;margin-bottom:14px;
+  display:block;line-height:1;
+}
+.status-title{
+  font-size:16px;font-weight:700;
+  color:var(--txt);margin-bottom:6px;
+}
+.status-sub{
+  font-size:13px;color:var(--mut);
+  line-height:1.5;
+}
+
+/* progress */
+.prog-wrap{
+  width:100%;margin-top:20px;
+  display:none;
+}
+.prog-label{
+  font-size:11px;color:var(--mut);
+  text-transform:uppercase;letter-spacing:.08em;
+  margin-bottom:6px;text-align:left;
+}
+.prog-bar{
+  width:100%;height:4px;
+  border-radius:2px;
+  background:var(--bor);overflow:hidden;
+}
+.prog-fill{
+  height:100%;width:0%;
+  background:var(--acc);
+  border-radius:2px;
+  transition:width .4s ease;
+}
+.prog-pct{
+  font-size:12px;color:var(--acc);
+  text-align:right;margin-top:4px;
+}
+
+/* next steps */
+.steps{
+  width:100%;
+  display:none;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:24px;
+}
+.step{
+  display:flex;align-items:flex-start;gap:12px;
+  background:var(--sur);border:1px solid var(--bor);
+  border-radius:12px;padding:14px;
+}
+.step-num{
+  width:24px;height:24px;border-radius:50%;
+  background:var(--acc);color:#000;
+  font-size:12px;font-weight:700;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;
+}
+.step-text{font-size:13px;line-height:1.5;color:var(--txt);}
+.step-text strong{color:var(--acc);}
+
+/* retry btn */
+#retryBtn{
+  width:100%;padding:14px;border-radius:12px;
+  background:var(--acc);color:#000;
+  font-weight:700;font-size:15px;
+  border:none;cursor:pointer;
+  display:none;margin-bottom:16px;
+}
+
+.footer{
+  font-size:10px;color:var(--mut);
+  letter-spacing:.06em;text-align:center;
+  margin-top:32px;
+}
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="brand">Gesture Squad</div>
+  <div class="title">Sign to Voice</div>
+  <div class="tagline">
+    Inclusive Innovation —<br>
+    <em>a world where everyone can be heard</em>
+  </div>
+
+  <!-- Status box -->
+  <div class="status-box">
+    <span class="status-icon" id="icon">⏳</span>
+    <div class="status-title" id="stitle">Preparing your device</div>
+    <div class="status-sub" id="ssub">
+      Downloading hand detection model.<br>
+      This happens once — stay on this page.
+    </div>
+
+    <!-- Progress bar -->
+    <div class="prog-wrap" id="progWrap">
+      <div class="prog-label">Downloading MediaPipe</div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-pct" id="progPct">0%</div>
+    </div>
+  </div>
+
+  <!-- Retry button (shown on error) -->
+  <button id="retryBtn" onclick="startInit()">Try Again</button>
+
+  <!-- Next steps (shown on success) -->
+  <div class="steps" id="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        Connect your phone to the WiFi network<br>
+        <strong>SignToVoice</strong> &nbsp;·&nbsp; password: <strong>gesture2026</strong>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        Open your browser and go to<br>
+        <strong>http://sign.voice</strong>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        Tap <strong>Connect</strong> — gesture translation starts
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">&copy; 2026 Gesture Squad</div>
+</div>
+
+<script>
+var MP_CDN = 'https://gesture-squad.github.io/s2v1/mp/';
+
+function setStatus(icon, title, sub){
+  document.getElementById('icon').textContent   = icon;
+  document.getElementById('stitle').textContent = title;
+  document.getElementById('ssub').textContent   = sub;
+}
+
+function setProgress(pct){
+  document.getElementById('progWrap').style.display = 'block';
+  document.getElementById('progFill').style.width   = pct + '%';
+  document.getElementById('progPct').textContent    = Math.round(pct) + '%';
+}
+
+function showSuccess(){
+  setStatus('✅', 'Device ready!', 'Hand detection is cached on your phone. You can now use Sign to Voice offline.');
+  document.getElementById('progWrap').style.display = 'none';
+  document.getElementById('steps').style.display    = 'flex';
+  document.getElementById('retryBtn').style.display = 'none';
+}
+
+function showError(msg){
+  setStatus('❌', 'Download failed', msg || 'Check your internet connection and try again.');
+  document.getElementById('progWrap').style.display = 'none';
+  document.getElementById('retryBtn').style.display = 'block';
+}
+
+// Load script and track progress via fetch first
+function loadScript(url, onDone, onErr){
+  // Prefetch to track progress
+  fetch(url)
+  .then(function(r){
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    var total = parseInt(r.headers.get('content-length') || '0');
+    var reader = r.body.getReader();
+    var loaded = 0;
+    var chunks = [];
+    function read(){
+      reader.read().then(function(res){
+        if(res.done){
+          // Now inject as script
+          var blob = new Blob(chunks, {type:'application/javascript'});
+          var burl = URL.createObjectURL(blob);
+          var s = document.createElement('script');
+          s.src = burl;
+          s.onload = function(){ URL.revokeObjectURL(burl); onDone(); };
+          s.onerror = function(){ URL.revokeObjectURL(burl); onErr(new Error('Script exec failed')); };
+          document.head.appendChild(s);
+          return;
+        }
+        chunks.push(res.value);
+        loaded += res.value.length;
+        if(total > 0) setProgress(Math.min((loaded/total)*60, 60)); // hands.js = 60%
+        read();
+      }).catch(onErr);
+    }
+    read();
+  }).catch(onErr);
+}
+
+function startInit(){
+  document.getElementById('retryBtn').style.display = 'none';
+  setStatus('⏳', 'Preparing your device',
+    'Downloading hand detection model.\nThis happens once — stay on this page.');
+  setProgress(0);
+
+  // Step 1: load hands.js (triggers internal asset loading)
+  setProgress(5);
+  loadScript(MP_CDN + 'hands.js',
+    function(){
+      setProgress(65);
+      // Step 2: initialise MediaPipe — this downloads WASM + model files
+      setStatus('⏳', 'Loading model files', 'Downloading WASM and hand detection model...');
+      try{
+        var h = new Hands({locateFile:function(f){ return MP_CDN+f; }});
+        h.setOptions({maxNumHands:1, modelComplexity:0,
+          minDetectionConfidence:0.6, minTrackingConfidence:0.5});
+        h.onResults(function(){});
+        setProgress(70);
+        h.initialize().then(function(){
+          setProgress(100);
+          h.close();
+          setTimeout(showSuccess, 400);
+        }).catch(function(e){
+          showError('Model initialisation failed. ' + e.message);
+        });
+      } catch(e){
+        showError('Failed to start MediaPipe. ' + e.message);
+      }
+    },
+    function(e){
+      showError('Could not download model. Check internet and try again.');
+      console.error(e);
+    }
+  );
+}
+
+// Auto-start on page load
+window.addEventListener('load', function(){
+  // Small delay so UI renders first
+  setTimeout(startInit, 600);
+});
+</script>
+</body>
+</html>

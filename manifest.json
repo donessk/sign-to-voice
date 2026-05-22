@@ -1,0 +1,20 @@
+{
+  "name": "Sign to Voice",
+  "short_name": "S2V1",
+  "description": "Ghanaian Sign Language medical interpreter by Gesture Squad",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "orientation": "portrait",
+  "lang": "en",
+  "categories": ["health", "accessibility", "medical"],
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%230a0a0f' rx='32'/><g fill='none' stroke='%2300e5a0' stroke-width='8' stroke-linecap='round'><rect x='20' y='72' width='60' height='48' rx='24'/><rect x='112' y='72' width='60' height='48' rx='24'/><path d='M80 96h32'/><path d='M8 84c3-12 9-15 18-12'/><path d='M184 84c-3-12-9-15-18-12'/></g></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
