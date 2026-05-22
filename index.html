@@ -163,21 +163,29 @@ html,body{
     <div class="step">
       <div class="step-num">1</div>
       <div class="step-text">
-        Connect your phone to the WiFi network<br>
-        <strong>SignToVoice</strong> &nbsp;·&nbsp; password: <strong>gesture2026</strong>
+        <strong>Power on your Sign to Voice glasses</strong> and wait for the indicator light.
+        The device will broadcast a WiFi network named <strong>SignToVoice</strong>.
       </div>
     </div>
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-text">
-        Open your browser and go to<br>
-        <strong>http://sign.voice</strong>
+        Go to your phone <strong>WiFi settings</strong> and connect to
+        <strong>SignToVoice</strong>. The password is printed on the back of your glasses unit.
       </div>
     </div>
     <div class="step">
       <div class="step-num">3</div>
       <div class="step-text">
-        Tap <strong>Connect</strong> — gesture translation starts
+        Your phone will show a <strong>"Sign in to network"</strong> notification.
+        Tap it — or open your browser and go to <strong>http://sign.voice</strong>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        Tap <strong>Connect</strong> on the app screen.
+        Hold your hand in front of the camera — gesture translation starts immediately.
       </div>
     </div>
   </div>
@@ -186,7 +194,7 @@ html,body{
 </div>
 
 <script>
-var MP_CDN = 'https://gesture-squad.github.io/s2v1/mp/';
+var MP_CDN = 'https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/';
 
 function setStatus(icon, title, sub){
   document.getElementById('icon').textContent   = icon;
@@ -201,7 +209,8 @@ function setProgress(pct){
 }
 
 function showSuccess(){
-  setStatus('✅', 'Device ready!', 'Hand detection is cached on your phone. You can now use Sign to Voice offline.');
+  setStatus('✅', 'You are all set!',
+    'Sign to Voice is ready on your phone and will work offline from now on. Follow the steps below to start using your device.');
   document.getElementById('progWrap').style.display = 'none';
   document.getElementById('steps').style.display    = 'flex';
   document.getElementById('retryBtn').style.display = 'none';
